@@ -2,6 +2,8 @@ package org.ashish.maze_generator_solver;
 
 import org.ashish.maze_generator_solver.constant.Constants;
 import org.ashish.maze_generator_solver.display.Window;
+import org.ashish.maze_generator_solver.entity.definition.grid.Node;
+import org.ashish.maze_generator_solver.entity.handler.MainEntityHandler;
 
 import java.awt.*;
 
@@ -12,6 +14,9 @@ public class Main extends Canvas implements Runnable {
     //Window
     private Window window;
     private boolean isRunning = false;
+
+    //Handler
+    private MainEntityHandler mainEntityHandler;
 
     public Main(){
         init();
@@ -34,6 +39,12 @@ public class Main extends Canvas implements Runnable {
             this.thread = new Thread(this, "Additional_Thread_1");
         }
 
+        //Handler
+        if(this.mainEntityHandler == null){
+            this.mainEntityHandler = new MainEntityHandler();
+        }
+
+        Node.CreateNodeGrid();
 
         this.start();
 
@@ -108,7 +119,10 @@ public class Main extends Canvas implements Runnable {
     }
 
     private void tick(){
-
+        //additional tick calls go here
+        if(this.mainEntityHandler != null){
+            this.mainEntityHandler.tick();
+        }
     }
 
     private void render(){
@@ -124,6 +138,9 @@ public class Main extends Canvas implements Runnable {
         g.fillRect(0, 0, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
 
         //additional render calls go here
+        if(this.mainEntityHandler != null){
+            this.mainEntityHandler.render(g);
+        }
 
 
         bs.show();

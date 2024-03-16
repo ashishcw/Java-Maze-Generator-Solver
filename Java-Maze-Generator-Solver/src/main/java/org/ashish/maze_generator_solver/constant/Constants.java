@@ -11,6 +11,6 @@ public class Constants {
     //Node specific settings
     public static final int NODE_SIZE = 16;
     public static final int NODE_OFFSET = 16;
-    public static final int MAX_ROWS = 15;
-    public static final int MAX_COLS = 15;
+    public static final int MAX_ROWS = (WINDOW_WIDTH/NODE_SIZE) - 3; //15;
+    public static final int MAX_COLS = (WINDOW_HEIGHT/NODE_SIZE) - 2;//15;
 }
